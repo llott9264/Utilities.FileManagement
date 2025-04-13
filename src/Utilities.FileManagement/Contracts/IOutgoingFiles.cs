@@ -8,7 +8,7 @@ public interface IOutgoingFiles : IFileBase
 	string GpgPublicKeyName { get; }
 	string GetArchiveFileFullPath(string fileName);
 	string GetArchiveGpgFileFullPath(string fileName);
-	string DataTransferGpgFullPath(string fileName);
+	string GetDataTransferGpgFullPath(string fileName);
 	Task<bool> EncryptFiles();
 	void AddFileToEncrypt(string fileName);
 	bool DoArchiveGpgFilesExist();

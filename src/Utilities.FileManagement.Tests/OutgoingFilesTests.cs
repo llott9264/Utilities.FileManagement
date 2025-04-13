@@ -47,7 +47,7 @@ public class OutgoingFilesTests
 		            $"{outgoingFilesWorkflow.ArchiveFolder}MyFile.txt");
 		Assert.True(outgoingFilesWorkflow.GetArchiveGpgFileFullPath("MyFile.txt.gpg") ==
 		            $"{outgoingFilesWorkflow.ArchiveFolder}MyFile.txt.gpg");
-		Assert.True(outgoingFilesWorkflow.DataTransferGpgFullPath("MyFile.txt.gpg") ==
+		Assert.True(outgoingFilesWorkflow.GetDataTransferGpgFullPath("MyFile.txt.gpg") ==
 		            $"{outgoingFilesWorkflow.DataTransferFolderBasePath}MyFile.txt.gpg");
 	}
 
@@ -216,7 +216,7 @@ public class OutgoingFilesTests
 	}
 
 	[Fact]
-	public void DataTransferGpgFullPath_MethodCallsCorrectly()
+	public void GetDataTransferGpgFullPath_MethodCallsCorrectly()
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
@@ -224,7 +224,7 @@ public class OutgoingFilesTests
 			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Act
-		string archiveGpgFileFullPath = outgoingFilesWorkflow.DataTransferGpgFullPath("File1.txt");
+		string archiveGpgFileFullPath = outgoingFilesWorkflow.GetDataTransferGpgFullPath("File1.txt");
 
 		//Assert
 		Assert.True(archiveGpgFileFullPath == $"{outgoingFilesWorkflow.DataTransferFolderBasePath}File1.txt");

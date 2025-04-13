@@ -9,7 +9,7 @@ public interface IIncomingFiles : IFileBase
 	string GpgPrivateKeyPassword { get; }
 	string GetArchiveFileFullPath(string fileName);
 	string GetArchiveGpgFileFullPath(string fileName);
-	string DataTransferGpgFullPath(string fileName);
+	string GetDataTransferGpgFullPath(string fileName);
 	Task<bool> DecryptFiles();
 	void AddFileToDecrypt(string fileName);
 	bool DoArchiveGpgFilesExist();

@@ -29,6 +29,11 @@ public abstract class FileBase(
 			CancellationToken.None);
 	}
 
+	public async Task CopyToFolder(string sourceFile, string destinationFolder)
+	{
+		await Mediator.Send(new CopyFileCommand(sourceFile, destinationFolder));
+	}
+
 	public async Task MoveToFolder(string sourceFile, string destinationFolder)
 	{
 		_ = await Mediator.Send(new MoveFileCommand(sourceFile, destinationFolder), CancellationToken.None);
@@ -43,10 +48,5 @@ public abstract class FileBase(
 	{
 		await Mediator.Send(new DeleteFilesCommand(new DirectoryInfo(DataTransferFolderBasePath)),
 			CancellationToken.None);
-	}
-
-	public async Task CopyToFolder(string sourceFile, string destinationFolder)
-	{
-		await Mediator.Send(new CopyFileCommand(sourceFile, destinationFolder));
 	}
 }

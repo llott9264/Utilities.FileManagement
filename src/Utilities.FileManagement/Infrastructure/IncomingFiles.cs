@@ -31,7 +31,7 @@ public abstract class IncomingFiles(
 		return Path.Combine(ArchiveFolder, fileName);
 	}
 
-	public string DataTransferGpgFullPath(string fileName)
+	public string GetDataTransferGpgFullPath(string fileName)
 	{
 		return Path.Combine(DataTransferFolderBasePath, fileName);
 	}
