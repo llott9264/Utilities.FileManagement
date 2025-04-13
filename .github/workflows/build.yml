@@ -25,4 +25,4 @@ jobs:
       - name: Run Unit Tests
         run: dotnet test ./src/Utilities.FileManagement.sln
       - name: Check Formatting
-        run: dotnet format ./src/Wlf.Utilities.FileManagement.sln --verify-no-changes --verbosity diagnostic
+        run: dotnet format ./src/Utilities.FileManagement.sln --verify-no-changes --verbosity diagnostic
