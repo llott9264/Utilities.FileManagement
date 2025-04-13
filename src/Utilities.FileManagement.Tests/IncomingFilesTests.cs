@@ -38,7 +38,7 @@ public class IncomingFilesTests
 		Assert.True(incomingFilesWorkflow.ArchiveFolderBasePath == ArchiveFolderBasePath);
 		Assert.True(incomingFilesWorkflow.DataTransferFolderBasePath == DataTransferFolderBasePath);
 		Assert.True(incomingFilesWorkflow.ArchiveFolder ==
-		            @$"{incomingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
+					@$"{incomingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
 		Assert.True(
 			incomingFilesWorkflow.ArchiveProcessedFolder == @$"{incomingFilesWorkflow.ArchiveFolder}Processed\");
 		Assert.True(incomingFilesWorkflow.ArchiveFailedFolder == @$"{incomingFilesWorkflow.ArchiveFolder}Failed\");
@@ -47,11 +47,11 @@ public class IncomingFilesTests
 		Assert.True(incomingFilesWorkflow.GpgPrivateKeyName == GpgPrivateKeyName);
 		Assert.True(incomingFilesWorkflow.GpgPrivateKeyPassword == GpgPrivateKeyPassword);
 		Assert.True(incomingFilesWorkflow.GetArchiveFileFullPath("MyFile.txt") ==
-		            $"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt");
+					$"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt");
 		Assert.True(incomingFilesWorkflow.GetArchiveGpgFileFullPath("MyFile.txt.gpg") ==
-		            $"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt.gpg");
+					$"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt.gpg");
 		Assert.True(incomingFilesWorkflow.GetDataTransferGpgFullPath("MyFile.txt.gpg") ==
-		            $"{incomingFilesWorkflow.DataTransferFolderBasePath}MyFile.txt.gpg");
+					$"{incomingFilesWorkflow.DataTransferFolderBasePath}MyFile.txt.gpg");
 	}
 
 	[Fact]
@@ -121,7 +121,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-			         File.Exists(file.ArchiveGpgFileFullPath)))
+					 File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -159,7 +159,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-			         File.Exists(file.ArchiveGpgFileFullPath)))
+					 File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -200,7 +200,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-			         File.Exists(file.ArchiveFileFullPath)))
+					 File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
@@ -238,7 +238,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-			         File.Exists(file.ArchiveFileFullPath)))
+					 File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
@@ -457,17 +457,17 @@ public class IncomingFilesTests
 		//Assert
 		Assert.True(incomingFilesWorkflow.Files.Count == 2);
 		Assert.True($"{incomingFilesWorkflow.DataTransferFolderBasePath}File1.txt.gpg" ==
-		            incomingFilesWorkflow.Files[0].DataTransferGpgFileFullPath);
+					incomingFilesWorkflow.Files[0].DataTransferGpgFileFullPath);
 		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File1.txt.gpg" ==
-		            incomingFilesWorkflow.Files[0].ArchiveGpgFileFullPath);
+					incomingFilesWorkflow.Files[0].ArchiveGpgFileFullPath);
 		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File1.txt" ==
-		            incomingFilesWorkflow.Files[0].ArchiveFileFullPath);
+					incomingFilesWorkflow.Files[0].ArchiveFileFullPath);
 
 		Assert.True($"{incomingFilesWorkflow.DataTransferFolderBasePath}File2.txt.gpg" ==
-		            incomingFilesWorkflow.Files[1].DataTransferGpgFileFullPath);
+					incomingFilesWorkflow.Files[1].DataTransferGpgFileFullPath);
 		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File2.txt.gpg" ==
-		            incomingFilesWorkflow.Files[1].ArchiveGpgFileFullPath);
+					incomingFilesWorkflow.Files[1].ArchiveGpgFileFullPath);
 		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File2.txt" ==
-		            incomingFilesWorkflow.Files[1].ArchiveFileFullPath);
+					incomingFilesWorkflow.Files[1].ArchiveFileFullPath);
 	}
 }

@@ -38,7 +38,7 @@ public class IncomingFileTests
 		Assert.True(incomingFileWorkflow.ArchiveFolderBasePath == ArchiveFolderBasePath);
 		Assert.True(incomingFileWorkflow.DataTransferFolderBasePath == DataTransferFolderBasePath);
 		Assert.True(incomingFileWorkflow.ArchiveFolder ==
-		            @$"{incomingFileWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
+					@$"{incomingFileWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
 		Assert.True(incomingFileWorkflow.ArchiveProcessedFolder == @$"{incomingFileWorkflow.ArchiveFolder}Processed\");
 		Assert.True(incomingFileWorkflow.ArchiveFailedFolder == @$"{incomingFileWorkflow.ArchiveFolder}Failed\");
 
@@ -49,7 +49,7 @@ public class IncomingFileTests
 		Assert.True(incomingFileWorkflow.GpgPrivateKeyPassword == GpgPrivateKeyPassword);
 		Assert.True(incomingFileWorkflow.ArchiveFileFullPath == $"{incomingFileWorkflow.ArchiveFolder}{FileName}");
 		Assert.True(incomingFileWorkflow.ArchiveGpgFileFullPath ==
-		            $"{incomingFileWorkflow.ArchiveFolder}{GpgFileName}");
+					$"{incomingFileWorkflow.ArchiveFolder}{GpgFileName}");
 		Assert.True(incomingFileWorkflow.DataTransferGpgFullPath == $"{DataTransferFolderBasePath}{GpgFileName}");
 	}
 
