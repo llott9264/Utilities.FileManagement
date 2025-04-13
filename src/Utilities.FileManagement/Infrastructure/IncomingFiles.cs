@@ -3,7 +3,6 @@ using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Exceptions;
 using Utilities.FileManagement.Models;
 using Utilities.Gpg.MediatR;
-using Utilities.IoOperations.MediatR.File.MoveFile;
 
 namespace Utilities.FileManagement.Infrastructure;
 
@@ -115,7 +114,7 @@ public abstract class IncomingFiles(
 		{
 			foreach (DecryptionFileDto file in Files)
 			{
-				_ = await Mediator.Send(new MoveFileCommand(file.DataTransferGpgFileFullPath, ArchiveFolder));
+				await MoveToFolder(file.DataTransferGpgFileFullPath, ArchiveFolder);
 			}
 
 			isSuccessful = true;

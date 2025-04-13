@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Utilities.FileManagement.Contracts;
 using Utilities.Gpg.MediatR;
-using Utilities.IoOperations.MediatR.File.CopyFile;
 
 namespace Utilities.FileManagement.Infrastructure;
 
@@ -37,7 +36,7 @@ public abstract class OutgoingFile(
 
 	public async Task CopyGpgFileToDataTransferFolder()
 	{
-		await Mediator.Send(new CopyFileCommand(ArchiveGpgFileFullPath, DataTransferFolderBasePath));
+		await CopyToFolder(ArchiveGpgFileFullPath, DataTransferFolderBasePath);
 	}
 
 	public async Task MoveArchiveFileToProcessedFolder()

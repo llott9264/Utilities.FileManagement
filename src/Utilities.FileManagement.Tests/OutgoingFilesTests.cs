@@ -21,7 +21,7 @@ public class OutgoingFilesTests
 	}
 
 	[Fact]
-	public void FisheriesDataToGsmfc_SetsProperties()
+	public void OutGoingFilesWorkflow_SetsProperties()
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
@@ -158,7 +158,7 @@ public class OutgoingFilesTests
 	}
 
 	[Fact]
-	public void EncryptFile_MethodCallsCorrectly()
+	public void EncryptFiles_MethodCallsCorrectly()
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();

@@ -3,7 +3,6 @@ using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Exceptions;
 using Utilities.FileManagement.Models;
 using Utilities.Gpg.MediatR;
-using Utilities.IoOperations.MediatR.File.CopyFile;
 
 namespace Utilities.FileManagement.Infrastructure;
 
@@ -112,7 +111,7 @@ public abstract class OutgoingFiles(
 		{
 			foreach (EncryptionFileDto file in Files)
 			{
-				await Mediator.Send(new CopyFileCommand(file.ArchiveGpgFileFullPath, DataTransferFolderBasePath));
+				await CopyToFolder(file.ArchiveGpgFileFullPath, DataTransferFolderBasePath);
 			}
 
 			isSuccessful = true;

@@ -9,6 +9,7 @@ public interface IFileBase
 	string ArchiveFailedFolder { get; }
 	Task CleanUpArchiveFolder(int fileRetentionLengthInMonths);
 	Task MoveToFolder(string sourceFile, string destinationFolder);
+	Task CopyToFolder(string sourceFile, string destinationFolder);
 	Task CreateArchiveDirectory();
 	Task DeleteFilesInDataTransferFolder();
 }

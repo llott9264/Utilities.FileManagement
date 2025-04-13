@@ -3,6 +3,7 @@ using Utilities.FileManagement.Contracts;
 using Utilities.IoOperations.MediatR.Directory.CleanUpDirectory;
 using Utilities.IoOperations.MediatR.Directory.CreateDirectory;
 using Utilities.IoOperations.MediatR.Directory.DeleteFiles;
+using Utilities.IoOperations.MediatR.File.CopyFile;
 using Utilities.IoOperations.MediatR.File.MoveFile;
 
 namespace Utilities.FileManagement.Infrastructure;
@@ -42,5 +43,10 @@ public abstract class FileBase(
 	{
 		await Mediator.Send(new DeleteFilesCommand(new DirectoryInfo(DataTransferFolderBasePath)),
 			CancellationToken.None);
+	}
+
+	public async Task CopyToFolder(string sourceFile, string destinationFolder)
+	{
+		await Mediator.Send(new CopyFileCommand(sourceFile, destinationFolder));
 	}
 }
