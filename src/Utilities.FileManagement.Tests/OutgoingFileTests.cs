@@ -9,8 +9,8 @@ namespace Utilities.FileManagement.Tests;
 
 public class OutgoingFileTests
 {
-	internal static readonly string ArchiveFolderBasePath = "MyArchiveFolderPath\\";
-	internal static readonly string DataTransferFolderBasePath = "MyDataTransferFolderPath\\";
+	internal static readonly string ArchiveFolderBasePath = "OutgoingFileArchiveFolderPath\\";
+	internal static readonly string DataTransferFolderBasePath = "OutgoingFileDataTransferFolderPath\\";
 	internal static readonly string GpgPublicKeyName = "MyPublicKey.asc";
 
 	private static Mock<IMediator> GetMockMediator()

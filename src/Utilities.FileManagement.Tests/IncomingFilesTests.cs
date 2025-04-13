@@ -9,8 +9,8 @@ namespace Utilities.FileManagement.Tests;
 
 public class IncomingFilesTests
 {
-	internal static readonly string ArchiveFolderBasePath = "MyArchiveFolderPath\\";
-	internal static readonly string DataTransferFolderBasePath = "MyDataTransferFolderPath\\";
+	internal static readonly string ArchiveFolderBasePath = "IncomingFilesArchiveFolderPath\\";
+	internal static readonly string DataTransferFolderBasePath = "IncomingFilesDataTransferFolderPath\\";
 	internal static readonly string GpgPrivateKeyName = "MyPublicKey.asc";
 	internal static readonly string GpgPrivateKeyPassword = "password";
 
@@ -21,7 +21,7 @@ public class IncomingFilesTests
 	}
 
 	[Fact]
-	public void incomingFilesWorkflow_SetsProperties()
+	public void IncomingFilesWorkflow_SetsProperties()
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();

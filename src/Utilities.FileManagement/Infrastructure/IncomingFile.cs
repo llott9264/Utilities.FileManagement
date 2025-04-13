@@ -19,7 +19,7 @@ public abstract class IncomingFile(
 	public string GpgFileName { get; } = gpgFileName;
 	public string GpgPrivateKeyName { get; } = gpgPrivateKeyName;
 	public string GpgPrivateKeyPassword { get; } = gpgPrivateKeyPassword;
-	public string DataTransferGpgFullPath => $@"{DataTransferFolderBasePath}\{GpgFileName}";
+	public string DataTransferGpgFullPath => $@"{DataTransferFolderBasePath}{GpgFileName}";
 	public string ArchiveFileFullPath => $@"{ArchiveFolder}{FileName}";
 	public string ArchiveGpgFileFullPath => $@"{ArchiveFolder}{GpgFileName}";
 
