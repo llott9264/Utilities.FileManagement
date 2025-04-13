@@ -30,6 +30,11 @@ jobs:
       with:
         dotnet-version: '8.x'
 
+    - name: Add GitHub NuGet Source
+      run: |
+        dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name Llott9264-NuGet "https://nuget.pkg.github.com/llott9264/index.json"
+        dotnet nuget list source
+
     - name: Build NuGet Package
       run: dotnet pack ./src/Utilities.FileManagement/Utilities.FileManagement.csproj /p:Version=${{ env.PACKAGE_VERSION }} --configuration ${{ env.BUILD_CONFIG }} --output ./artifacts
 
