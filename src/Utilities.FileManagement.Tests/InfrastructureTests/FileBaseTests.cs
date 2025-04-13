@@ -5,7 +5,7 @@ using Utilities.IoOperations.MediatR.Directory.CleanUpDirectory;
 using Utilities.IoOperations.MediatR.Directory.CreateDirectory;
 using Utilities.IoOperations.MediatR.Directory.DeleteFiles;
 
-namespace Utilities.FileManagement.Tests;
+namespace Utilities.FileManagement.Tests.InfrastructureTests;
 
 public class FileBaseTests
 {

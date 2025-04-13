@@ -4,7 +4,7 @@ using Utilities.FileManagement.Tests.Workflows;
 using Utilities.Gpg.MediatR;
 using Utilities.IoOperations.MediatR.File.MoveFile;
 
-namespace Utilities.FileManagement.Tests;
+namespace Utilities.FileManagement.Tests.InfrastructureTests;
 
 public class IncomingFileTests
 {
