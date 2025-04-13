@@ -118,7 +118,7 @@ public abstract class OutgoingFiles(
 		}
 		catch (Exception e)
 		{
-			throw new CopyFileException(
+			throw new FileIoException(
 				$"Failure to copy gpg files to data transfer folder. Error Message: {e.Message}");
 		}
 

@@ -121,7 +121,7 @@ public abstract class IncomingFiles(
 		}
 		catch (Exception e)
 		{
-			throw new CopyFileException($"Failure to copy gpg files to archive folder. Error Message: {e.Message}");
+			throw new FileIoException($"Failure to move gpg files to archive folder. Error Message: {e.Message}");
 		}
 
 		return isSuccessful;

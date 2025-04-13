@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Moq;
+using Utilities.FileManagement.Exceptions;
 using Utilities.FileManagement.Models;
 using Utilities.FileManagement.Tests.Workflows;
 using Utilities.Gpg.MediatR;
@@ -186,6 +187,24 @@ public class OutgoingFilesTests
 	}
 
 	[Fact]
+	public async Task EncryptFiles_ThrowsException()
+	{
+		//Arrange
+		Mock<IMediator> mock = GetMockMediator();
+		mock.Setup(m => m.Send(It.IsAny<EncryptFileCommand>(), CancellationToken.None))
+			.Throws(new Exception("Failed to encrypt because I said so."));
+
+		OutgoingFilesWorkflow outgoingFilesWorkflow =
+			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt");
+		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt");
+		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt");
+
+		//Act & Assert
+		await Assert.ThrowsAsync<EncryptionException>(() => outgoingFilesWorkflow.EncryptFiles());
+	}
+
+	[Fact]
 	public void GetArchiveFileFullPath_MethodCallsCorrectly()
 	{
 		//Arrange
@@ -255,6 +274,24 @@ public class OutgoingFilesTests
 					&& request.DestinationFolder == $"{outgoingFilesWorkflow.DataTransferFolderBasePath}"),
 				CancellationToken.None), Times.Once);
 		}
+	}
+
+	[Fact]
+	public async Task CopyGpgFilesToDataTransferFolder_ThrowsException()
+	{
+		//Arrange
+		Mock<IMediator> mock = GetMockMediator();
+		mock.Setup(m => m.Send(It.IsAny<CopyFileCommand>(), CancellationToken.None))
+			.Throws(new Exception("Failed to copy file because I said so."));
+
+		OutgoingFilesWorkflow outgoingFilesWorkflow =
+			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
+		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
+		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
+
+		//Act & Assert
+		await Assert.ThrowsAsync<FileIoException>(() => outgoingFilesWorkflow.CopyGpgFilesToDataTransferFolder());
 	}
 
 	[Fact]
