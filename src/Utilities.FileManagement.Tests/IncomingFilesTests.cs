@@ -46,12 +46,54 @@ public class IncomingFilesTests
 		//IncomingFiles Properties
 		Assert.True(incomingFilesWorkflow.GpgPrivateKeyName == GpgPrivateKeyName);
 		Assert.True(incomingFilesWorkflow.GpgPrivateKeyPassword == GpgPrivateKeyPassword);
-		Assert.True(incomingFilesWorkflow.GetArchiveFileFullPath("MyFile.txt") ==
-					$"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt");
-		Assert.True(incomingFilesWorkflow.GetArchiveGpgFileFullPath("MyFile.txt.gpg") ==
-					$"{incomingFilesWorkflow.ArchiveFolder}MyFile.txt.gpg");
-		Assert.True(incomingFilesWorkflow.GetDataTransferGpgFullPath("MyFile.txt.gpg") ==
-					$"{incomingFilesWorkflow.DataTransferFolderBasePath}MyFile.txt.gpg");
+	}
+
+	[Fact]
+	public void GetArchiveFileFullPath_MethodCallsCorrectly()
+	{
+		//Arrange
+		Mock<IMediator> mock = GetMockMediator();
+		IncomingFilesWorkflow incomingFilesWorkflow =
+			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+				GpgPrivateKeyPassword);
+
+		//Act
+		string archiveFileFullPath = incomingFilesWorkflow.GetArchiveFileFullPath("File1.txt");
+
+		//Assert
+		Assert.True(archiveFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File1.txt");
+	}
+
+	[Fact]
+	public void GetArchiveGpgFileFullPath_MethodCallsCorrectly()
+	{
+		//Arrange
+		Mock<IMediator> mock = GetMockMediator();
+		IncomingFilesWorkflow incomingFilesWorkflow =
+			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+				GpgPrivateKeyPassword);
+
+		//Act
+		string archiveGpgFileFullPath = incomingFilesWorkflow.GetArchiveGpgFileFullPath("File1.txt");
+
+		//Assert
+		Assert.True(archiveGpgFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File1.txt");
+	}
+
+	[Fact]
+	public void DataTransferGpgFullPath_MethodCallsCorrectly()
+	{
+		//Arrange
+		Mock<IMediator> mock = GetMockMediator();
+		IncomingFilesWorkflow incomingFilesWorkflow =
+			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+				GpgPrivateKeyPassword);
+
+		//Act
+		string archiveGpgFileFullPath = incomingFilesWorkflow.GetDataTransferGpgFullPath("File1.txt");
+
+		//Assert
+		Assert.True(archiveGpgFileFullPath == $"{incomingFilesWorkflow.DataTransferFolderBasePath}File1.txt");
 	}
 
 	[Fact]
@@ -121,7 +163,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveGpgFileFullPath)))
+					File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -159,7 +201,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveGpgFileFullPath)))
+					File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -200,7 +242,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveFileFullPath)))
+					File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
@@ -238,7 +280,7 @@ public class IncomingFilesTests
 		}
 
 		foreach (DecryptionFileDto file in incomingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveFileFullPath)))
+					File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
@@ -456,18 +498,18 @@ public class IncomingFilesTests
 
 		//Assert
 		Assert.True(incomingFilesWorkflow.Files.Count == 2);
-		Assert.True($"{incomingFilesWorkflow.DataTransferFolderBasePath}File1.txt.gpg" ==
-					incomingFilesWorkflow.Files[0].DataTransferGpgFileFullPath);
-		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File1.txt.gpg" ==
-					incomingFilesWorkflow.Files[0].ArchiveGpgFileFullPath);
-		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File1.txt" ==
-					incomingFilesWorkflow.Files[0].ArchiveFileFullPath);
 
-		Assert.True($"{incomingFilesWorkflow.DataTransferFolderBasePath}File2.txt.gpg" ==
-					incomingFilesWorkflow.Files[1].DataTransferGpgFileFullPath);
-		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File2.txt.gpg" ==
-					incomingFilesWorkflow.Files[1].ArchiveGpgFileFullPath);
-		Assert.True($"{incomingFilesWorkflow.ArchiveFolder}File2.txt" ==
-					incomingFilesWorkflow.Files[1].ArchiveFileFullPath);
+		DecryptionFileDto file1 = incomingFilesWorkflow.Files[0];
+		DecryptionFileDto file2 = incomingFilesWorkflow.Files[1];
+
+		Assert.True(file1.DataTransferGpgFileFullPath ==
+					$"{incomingFilesWorkflow.DataTransferFolderBasePath}File1.txt.gpg");
+		Assert.True(file1.ArchiveGpgFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File1.txt.gpg");
+		Assert.True(file1.ArchiveFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File1.txt");
+
+		Assert.True(file2.DataTransferGpgFileFullPath ==
+					$"{incomingFilesWorkflow.DataTransferFolderBasePath}File2.txt.gpg");
+		Assert.True(file2.ArchiveGpgFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File2.txt.gpg");
+		Assert.True(file2.ArchiveFileFullPath == $"{incomingFilesWorkflow.ArchiveFolder}File2.txt");
 	}
 }

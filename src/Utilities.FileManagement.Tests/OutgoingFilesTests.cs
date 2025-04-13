@@ -44,12 +44,6 @@ public class OutgoingFilesTests
 
 		//OutgoingFiles Properties
 		Assert.True(outgoingFilesWorkflow.GpgPublicKeyName == GpgPublicKeyName);
-		Assert.True(outgoingFilesWorkflow.GetArchiveFileFullPath("MyFile.txt") ==
-					$"{outgoingFilesWorkflow.ArchiveFolder}MyFile.txt");
-		Assert.True(outgoingFilesWorkflow.GetArchiveGpgFileFullPath("MyFile.txt.gpg") ==
-					$"{outgoingFilesWorkflow.ArchiveFolder}MyFile.txt.gpg");
-		Assert.True(outgoingFilesWorkflow.GetDataTransferGpgFullPath("MyFile.txt.gpg") ==
-					$"{outgoingFilesWorkflow.DataTransferFolderBasePath}MyFile.txt.gpg");
 	}
 
 	[Fact]
@@ -311,7 +305,7 @@ public class OutgoingFilesTests
 		}
 
 		foreach (EncryptionFileDto file in outgoingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveGpgFileFullPath)))
+					File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -348,7 +342,7 @@ public class OutgoingFilesTests
 		}
 
 		foreach (EncryptionFileDto file in outgoingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveGpgFileFullPath)))
+					File.Exists(file.ArchiveGpgFileFullPath)))
 		{
 			File.Delete(file.ArchiveGpgFileFullPath);
 		}
@@ -388,7 +382,7 @@ public class OutgoingFilesTests
 		}
 
 		foreach (EncryptionFileDto file in outgoingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveFileFullPath)))
+					File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
@@ -425,7 +419,7 @@ public class OutgoingFilesTests
 		}
 
 		foreach (EncryptionFileDto file in outgoingFilesWorkflow.Files.Where(file =>
-					 File.Exists(file.ArchiveFileFullPath)))
+					File.Exists(file.ArchiveFileFullPath)))
 		{
 			File.Delete(file.ArchiveFileFullPath);
 		}
