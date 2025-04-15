@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Moq;
+using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Exceptions;
 using Utilities.FileManagement.Models;
 using Utilities.FileManagement.Tests.Workflows;
@@ -28,8 +29,8 @@ public class IncomingFilesTests
 		Mock<IMediator> mock = GetMockMediator();
 
 		//Act
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
 
 		//Assert
@@ -53,8 +54,8 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
 
 		//Act
@@ -69,8 +70,8 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
 
 		//Act
@@ -85,8 +86,8 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
 
 		//Act
@@ -101,9 +102,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -134,9 +136,10 @@ public class IncomingFilesTests
 		mock.Setup(m => m.Send(It.IsAny<DecryptFileCommand>(), CancellationToken.None))
 			.Throws(new Exception("Failed to decrypt because I said so."));
 
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -150,9 +153,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileExist1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileExist2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileExist3.txt.gpg");
@@ -188,9 +192,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileDoesNotExist1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileDoesNotExist2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("GpgFileDoesNotExist3.txt.gpg");
@@ -229,9 +234,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileExist1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileExistFile2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileExistFile3.txt.gpg");
@@ -267,9 +273,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileDoesNotExist1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileDoesNotExist2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("ArchiveFileDoesNotExist3.txt.gpg");
@@ -307,9 +314,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -334,9 +342,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -362,9 +371,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -389,9 +399,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -417,9 +428,10 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -448,9 +460,10 @@ public class IncomingFilesTests
 		mock.Setup(m => m.Send(It.IsAny<MoveFileCommand>(), CancellationToken.None))
 			.Throws(new Exception("Failed to move file because I said so."));
 
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
+
 		incomingFilesWorkflow.AddFileToDecrypt("File1.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File2.txt.gpg");
 		incomingFilesWorkflow.AddFileToDecrypt("File3.txt.gpg");
@@ -464,8 +477,8 @@ public class IncomingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFilesWorkflow incomingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFiles incomingFilesWorkflow =
+			new IncomingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword);
 
 		if (!Directory.Exists(incomingFilesWorkflow.DataTransferFolderBasePath))
