@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Moq;
+using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Tests.Workflows;
 using Utilities.Gpg.MediatR;
 using Utilities.IoOperations.MediatR.File.MoveFile;
@@ -28,8 +29,8 @@ public class IncomingFileTests
 		Mock<IMediator> mock = GetMockMediator();
 
 		//Act
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Assert
@@ -58,8 +59,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act
@@ -83,8 +84,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		if (!Directory.Exists(incomingFileWorkflow.ArchiveFolder))
@@ -114,8 +115,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		if (!Directory.Exists(incomingFileWorkflow.ArchiveFolder))
@@ -140,8 +141,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		if (!Directory.Exists(incomingFileWorkflow.ArchiveFolder))
@@ -171,8 +172,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		if (!Directory.Exists(incomingFileWorkflow.ArchiveFolder))
@@ -197,8 +198,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act
@@ -218,8 +219,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act
@@ -240,8 +241,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act
@@ -261,8 +262,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act
@@ -284,8 +285,8 @@ public class IncomingFileTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
+		IIncomingFile incomingFileWorkflow =
+			new IncomingFileWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPrivateKeyName,
 				GpgPrivateKeyPassword, FileName, GpgFileName);
 
 		//Act

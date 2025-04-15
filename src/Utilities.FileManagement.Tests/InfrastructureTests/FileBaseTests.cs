@@ -1,5 +1,6 @@
 using MediatR;
 using Moq;
+using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Tests.Workflows;
 using Utilities.IoOperations.MediatR.Directory.CleanUpDirectory;
 using Utilities.IoOperations.MediatR.Directory.CreateDirectory;
@@ -26,7 +27,7 @@ public class FileBaseTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow = new(mock.Object,
+		IIncomingFile incomingFileWorkflow = new IncomingFileWorkflow(mock.Object,
 			ArchiveFolderBasePath,
 			DataTransferFolderBasePath,
 			GpgPrivateKeyName,
@@ -50,7 +51,7 @@ public class FileBaseTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow = new(mock.Object,
+		IIncomingFile incomingFileWorkflow = new IncomingFileWorkflow(mock.Object,
 			ArchiveFolderBasePath,
 			DataTransferFolderBasePath,
 			GpgPrivateKeyName,
@@ -72,7 +73,7 @@ public class FileBaseTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		IncomingFileWorkflow incomingFileWorkflow = new(mock.Object,
+		IIncomingFile incomingFileWorkflow = new IncomingFileWorkflow(mock.Object,
 			ArchiveFolderBasePath,
 			DataTransferFolderBasePath,
 			GpgPrivateKeyName,
