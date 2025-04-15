@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Moq;
+using Utilities.FileManagement.Contracts;
 using Utilities.FileManagement.Exceptions;
 using Utilities.FileManagement.Models;
 using Utilities.FileManagement.Tests.Workflows;
@@ -28,8 +29,8 @@ public class OutgoingFilesTests
 		Mock<IMediator> mock = GetMockMediator();
 
 		//Act
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Assert
 
@@ -51,8 +52,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -77,8 +79,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -104,8 +107,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -130,8 +134,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -157,8 +162,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt");
@@ -188,8 +194,9 @@ public class OutgoingFilesTests
 		mock.Setup(m => m.Send(It.IsAny<EncryptFileCommand>(), CancellationToken.None))
 			.Throws(new Exception("Failed to encrypt because I said so."));
 
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt");
@@ -203,8 +210,8 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Act
 		string archiveFileFullPath = outgoingFilesWorkflow.GetArchiveFileFullPath("File1.txt");
@@ -218,8 +225,8 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Act
 		string archiveGpgFileFullPath = outgoingFilesWorkflow.GetArchiveGpgFileFullPath("File1.txt");
@@ -233,8 +240,8 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Act
 		string archiveGpgFileFullPath = outgoingFilesWorkflow.GetDataTransferGpgFullPath("File1.txt");
@@ -248,8 +255,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -278,8 +286,9 @@ public class OutgoingFilesTests
 		mock.Setup(m => m.Send(It.IsAny<CopyFileCommand>(), CancellationToken.None))
 			.Throws(new Exception("Failed to copy file because I said so."));
 
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("File1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("File3.txt.gpg");
@@ -293,8 +302,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileExist1.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileExist2.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileExist3.txt");
@@ -330,8 +340,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileDoesNotExist1.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileDoesNotExist2.txt");
 		outgoingFilesWorkflow.AddFileToEncrypt("GpgFileDoesNotExist3.txt");
@@ -370,8 +381,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileExist1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileExistFile2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileExistFile3.txt.gpg");
@@ -407,8 +419,9 @@ public class OutgoingFilesTests
 	{
 		//Arrange
 		Mock<IMediator> mock = GetMockMediator();
-		OutgoingFilesWorkflow outgoingFilesWorkflow =
-			new(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+		IOutgoingFiles outgoingFilesWorkflow =
+			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
+
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileDoesNotExist1.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileDoesNotExist2.txt.gpg");
 		outgoingFilesWorkflow.AddFileToEncrypt("ArchiveFileDoesNotExist3.txt.gpg");
