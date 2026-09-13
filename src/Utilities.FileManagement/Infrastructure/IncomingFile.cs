@@ -59,7 +59,7 @@ public abstract class IncomingFile(
 		await MoveToFolder(ArchiveGpgFileFullPath, ArchiveFailedFolder);
 	}
 
-	public async Task MoveToGpgFileToArchiveFolder()
+	public async Task MoveGpgFileToArchiveFolder()
 	{
 		await MoveToFolder(DataTransferGpgFullPath, ArchiveFolder);
 	}
