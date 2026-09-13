@@ -38,7 +38,7 @@ public class OutgoingFileTests
 		Assert.True(outgoingFileWorkflow.ArchiveFolderBasePath == ArchiveFolderBasePath);
 		Assert.True(outgoingFileWorkflow.DataTransferFolderBasePath == DataTransferFolderBasePath);
 		Assert.True(outgoingFileWorkflow.ArchiveFolder ==
-					@$"{outgoingFileWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
+					@$"{outgoingFileWorkflow.ArchiveFolderBasePath}{DateTime.Now:yyyyMMdd}\");
 		Assert.True(
 			outgoingFileWorkflow.ArchiveProcessedFolder == @$"{outgoingFileWorkflow.ArchiveFolder}Processed\");
 		Assert.True(outgoingFileWorkflow.ArchiveFailedFolder == @$"{outgoingFileWorkflow.ArchiveFolder}Failed\");

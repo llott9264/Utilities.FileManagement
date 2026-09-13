@@ -39,7 +39,7 @@ public class IncomingFilesTests
 		Assert.True(incomingFilesWorkflow.ArchiveFolderBasePath == ArchiveFolderBasePath);
 		Assert.True(incomingFilesWorkflow.DataTransferFolderBasePath == DataTransferFolderBasePath);
 		Assert.True(incomingFilesWorkflow.ArchiveFolder ==
-					@$"{incomingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
+					@$"{incomingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:yyyyMMdd}\");
 		Assert.True(
 			incomingFilesWorkflow.ArchiveProcessedFolder == @$"{incomingFilesWorkflow.ArchiveFolder}Processed\");
 		Assert.True(incomingFilesWorkflow.ArchiveFailedFolder == @$"{incomingFilesWorkflow.ArchiveFolder}Failed\");
