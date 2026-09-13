@@ -14,7 +14,7 @@ public class FileBaseTests
 	private const string DataTransferFolderBasePath = "MyDataTransferFolderPath\\";
 	private const string GpgPrivateKeyName = "MyPublicKey.asc";
 	private const string GpgPrivateKeyPassword = "password";
-	private readonly string _folderName = DateTime.Now.ToString("MMddyyyy");
+	private readonly string _folderName = DateTime.Now.ToString("yyyyMMdd");
 
 	private static Mock<IMediator> GetMockMediator()
 	{

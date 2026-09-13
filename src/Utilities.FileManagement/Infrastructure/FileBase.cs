@@ -13,7 +13,7 @@ public abstract class FileBase(
 	string archiveFolderBasePath,
 	string dataTransferFolderBasePath) : IFileBase
 {
-	private readonly string _folderName = DateTime.Now.ToString("MMddyyyy");
+	private readonly string _folderName = DateTime.Now.ToString("yyyyMMdd");
 
 	protected IMediator Mediator { get; } = mediator;
 	public string ArchiveFolderBasePath { get; } = archiveFolderBasePath;

@@ -10,7 +10,7 @@ public interface IIncomingFile : IFileBase
 	string ArchiveFileFullPath { get; }
 	string ArchiveGpgFileFullPath { get; }
 
-	Task MoveToGpgFileToArchiveFolder();
+	Task MoveGpgFileToArchiveFolder();
 	bool DoesArchiveGpgFileExist();
 	bool DoesArchiveFileExist();
 	Task DecryptFile();

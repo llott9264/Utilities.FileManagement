@@ -38,7 +38,7 @@ public class OutgoingFilesTests
 		Assert.True(outgoingFilesWorkflow.ArchiveFolderBasePath == ArchiveFolderBasePath);
 		Assert.True(outgoingFilesWorkflow.DataTransferFolderBasePath == DataTransferFolderBasePath);
 		Assert.True(outgoingFilesWorkflow.ArchiveFolder ==
-					@$"{outgoingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:MMddyyyy}\");
+					@$"{outgoingFilesWorkflow.ArchiveFolderBasePath}{DateTime.Now:yyyyMMdd}\");
 		Assert.True(
 			outgoingFilesWorkflow.ArchiveProcessedFolder == @$"{outgoingFilesWorkflow.ArchiveFolder}Processed\");
 		Assert.True(outgoingFilesWorkflow.ArchiveFailedFolder == @$"{outgoingFilesWorkflow.ArchiveFolder}Failed\");
@@ -244,10 +244,10 @@ public class OutgoingFilesTests
 			new OutgoingFilesWorkflow(mock.Object, ArchiveFolderBasePath, DataTransferFolderBasePath, GpgPublicKeyName);
 
 		//Act
-		string archiveGpgFileFullPath = outgoingFilesWorkflow.GetDataTransferGpgFullPath("File1.txt");
+		string dataTransferGpgFullPath = outgoingFilesWorkflow.GetDataTransferGpgFullPath("File1.txt");
 
 		//Assert
-		Assert.True(archiveGpgFileFullPath == $"{outgoingFilesWorkflow.DataTransferFolderBasePath}File1.txt");
+		Assert.True(dataTransferGpgFullPath == $"{outgoingFilesWorkflow.DataTransferFolderBasePath}File1.txt");
 	}
 
 	[Fact]
